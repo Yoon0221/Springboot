@@ -1,0 +1,33 @@
+name: Java CI with Gradle
+
+# 워크플로우를 수행할 이벤트를 설정합니다. 
+# 여기서는 'main' 브랜치에 Pull Request가 생성될 때 수행됩니다.
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+# 수행할 워크플로우를 정의합니다.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) 기본적으로 리포지토리의 코드를 체크아웃합니다.
+      - uses: actions/checkout@v3
+
+      # 2) JDK 버전을 설정합니다. 다른 버전을 원하면 'java-version'을 수정하세요.
+      - name: Set up JDK '17'  # 예: '11' 또는 원하는 JDK 버전으로 변경
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'  # 예: '11' 또는 원하는 JDK 버전으로 변경
+          distribution: 'temurin'
+
+      # 3) Gradle을 사용하여 프로젝트를 빌드합니다. 
+      # 'clean build' 명령어를 실행합니다.
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v3.5.0  # 최신 버전으로 변경
+        with:
+          arguments: clean build
