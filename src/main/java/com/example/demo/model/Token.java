@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,11 +10,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User {
+public class Token {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
-    private String email;
+    private String token;   // JWT 토큰
+    private Long userId;    // 토큰 소유자의 ID
 }
