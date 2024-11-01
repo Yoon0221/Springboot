@@ -5,7 +5,6 @@ spring:
         registration:
           kakao:
             client-id: 8588f14ade469896694c1061ceace0da
-            client-secret: OnUroitWJ47M5DnsJE6wRZJEKuII5vIu
             redirect-uri: "http://13.209.179.25:8081/login/oauth2/code/kakao"
             authorization-grant-type: authorization_code
             scope: profile_nickname, profile_image, account_email
