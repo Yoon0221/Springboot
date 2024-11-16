@@ -1,4 +1,4 @@
-# CICD
+# Springboot
 ## 커밋 메시지 규칙
 
 #### 1. `feat`
