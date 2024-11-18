@@ -9,7 +9,7 @@ public class TempQueryServiceImpl implements TempQueryService {
 
     @Override
     public void checkFlag(Integer flag) {
-        if (flag == 1) {
+        if (flag == 120) {
             // ErrorStatus.TEMP_EXCEPTION.getReasonHttpStatus()를 사용하여 ErrorReasonDTO를 반환
             throw new GeneralException(ErrorStatus.TEMP_EXCEPTION.getReasonHttpStatus());
         }

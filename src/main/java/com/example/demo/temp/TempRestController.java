@@ -20,7 +20,7 @@ public class TempRestController {
         return ApiResponse.onSuccess(TempConverter.toTempTestDTO());
     }
 
-    // 에러를 발생시키는 예외 처리 API (flag 가 1이 아닌 값이면 성공, 1이면 에러 발생)
+    // 에러를 발생시키는 예외 처리 API
     @GetMapping("/exception")
     public ApiResponse<TempResponse.TempExceptionDTO> exceptionAPI(@RequestParam Integer flag) {
         tempQueryService.checkFlag(flag);
