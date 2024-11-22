@@ -28,9 +28,8 @@ jobs:
       # 4. 키스토어 복호화
       - name: Decrypt Keystore
         run: |
-          # 복호화 후 현재 작업 디렉토리 아래 'decrypted' 폴더에 저장
-          mkdir -p ./decrypted
-          echo ${{ secrets.KEYSTORE_SECRET }} | base64 --decode > ./decrypted/keystore.p12
+          # 복호화 후 현재 작업 디렉토리 아래에 저장
+          echo ${{ secrets.KEYSTORE_SECRET }} | base64 --decode > ./keystore.p12
 
       # 5. Gradle 빌드 및 배포
       - name: Run Gradle build and deploy
