@@ -15,17 +15,11 @@ jobs:
         uses: actions/checkout@v3
 
       # 2. Java 17 설치
-      - name: Set up Java 17
+      - name: Set up JDK 17  # Java 개발 킷 설정
         uses: actions/setup-java@v3
         with:
-          java-version: 17
-          java-package: jdk
-          check-latest: false
-          server-id: github
-          server-username: ${{ github.actor }}
-          server-password: ${{ secrets.GITHUB_TOKEN }}
-          overwrite-settings: true
-          distribution: 'adoptopenjdk'  # 또는 'zulu', 원하는 JDK 배포판
+          distribution: 'temurin'
+          java-version: '17'
 
       # 3. Gradle 실행 권한 부여
       - name: Grant execute permissions to gradlew
