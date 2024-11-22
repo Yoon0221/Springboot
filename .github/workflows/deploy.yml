@@ -28,7 +28,7 @@ jobs:
       # 4. 키스토어 복호화
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.p12
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > /home/ubuntu/keystore.p12  # 키스토어 파일을 복호화하여 저장
 
       # 5. Gradle 빌드 및 배포
       - name: Run Gradle build and deploy
