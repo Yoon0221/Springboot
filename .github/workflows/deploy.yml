@@ -34,7 +34,7 @@ jobs:
           base64 --decode encrypted.keystore > ./keystore.p12  # base64로 복호화하여 keystore.p12 파일로 저장
           ls -l ./keystore.p12  # 파일이 제대로 생성되었는지 확인
 
-      # 5. Gradle 빌드 및 배포
+       # 5. Gradle 빌드 및 배포
       - name: Run Gradle build and deploy
         env:
           DB_URL: ${{ secrets.DB_URL }}
@@ -42,9 +42,22 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          KAKAO_CLIENT_ID: ${{ secrets.KAKAO_CLIENT_ID }}
+          KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          GOOGLE_REDIRECT_URI: ${{ secrets.GOOGLE_REDIRECT_URI }}
+          KAKAO_REDIRECT_URI: ${{ secrets.KAKAO_REDIRECT_URI }}
+          NAVER_REDIRECT_URI: ${{ secrets.NAVER_REDIRECT_URI }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
         run: |
-          ./gradlew build
-          ./gradlew bootRun
+          ./gradlew build  # 빌드 실행
+          ./gradlew bootRun  # 애플리케이션 실행
 
       # 6. EC2에 배포
       - name: Deploy to EC2
