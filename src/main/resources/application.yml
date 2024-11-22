@@ -2,12 +2,12 @@ server:
   ssl:
     key-store: "classpath:keystore.p12"
     key-store-type: PKCS12
-    key-store-password: ${KEY_STORE_PASSWORD}
+    key-store-password: asdttycc
   port: 443
 
 spring:
   jwt:
-    secret-key: ${JWT_SECRET_KEY}  # JWT 비밀 키 (256비트 이상)
+    secret-key: "hadgfsfsfsfsssfsfssfsfsfsffasadad1234567890"  # JWT 비밀 키 (256비트 이상)
     redirect: "https://yoonsever.xn--h32bi4v.xn--3e0b707e:443/login?name=%s&user_uuid=%s"  # 로그인 후 리디렉션 URL (사용자 uuid 포함)
     access-token:
       expiration-time: 3600000  # 액세스 토큰 만료 시간 (밀리초 단위, 1시간)
@@ -18,34 +18,36 @@ spring:
     oauth2:
       client:
         registration:
+
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: 68070665235-qvdshelcl2eja5amt37urbhqgpuuv4ve.apps.googleusercontent.com
+            client-secret: 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
             scope:
               - email
               - profile
-            redirect-uri: ${GOOGLE_REDIRECT_URI}
+            redirect-uri: https://yoonsever.xn--h32bi4v.xn--3e0b707e:443/login/oauth2/code/google
 
           kakao:
-            client-id: ${KAKAO_CLIENT_ID}
-            client-secret: ${KAKAO_CLIENT_SECRET}
+            client-id: 6b1d134980644fe3a21d1a0f09b52c4d
+            client-secret: 6CE5ZNnGwrIfqkAjBENpiFIik67OsSdE
             scope:
               - profile_nickname
             authorization-grant-type: authorization_code
-            redirect-uri: ${KAKAO_REDIRECT_URI}
+            redirect-uri: https://yoonsever.xn--h32bi4v.xn--3e0b707e:443/login/oauth2/code/kakao
             client-name: Kakao
             client-authentication-method: client_secret_post
 
           naver:
-            client-id: ${NAVER_CLIENT_ID}
-            client-secret: ${NAVER_CLIENT_SECRET}
+            client-id: hbhB10Tk7nEfIWzdZDnW
+            client-secret: TR7P0nBX0D
             scope:
               - name
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: ${NAVER_REDIRECT_URI}
+            redirect-uri: https://yoonsever.xn--h32bi4v.xn--3e0b707e:443/login/oauth2/code/naver
 
         provider:
+
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
             token-uri: https://kauth.kakao.com/oauth/token
@@ -59,9 +61,9 @@ spring:
             user-name-attribute: response
 
   datasource:
-    url: ${DB_URL} # 실제 DB URL
-    username: ${DB_USERNAME} # 실제 사용자 이름
-    password: ${DB_PASSWORD} # 실제 사용자 비밀번호
+    url: jdbc:mysql://yoondb.cnwom4kocpo9.ap-northeast-2.rds.amazonaws.com:3306/yoondb?serverTimezone=Asia/Seoul&characterEncoding=UTF-8 # 실제 엔드포인트와 DB 이름
+    username: admin   # 실제 사용자 이름
+    password: uionrtqwe   # 실제 사용자 비번
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -78,11 +80,11 @@ spring:
 cloud:
   aws:
     s3:
-      bucket: ${AWS_S3_BUCKET}  # 실제 S3 버킷 이름
+      bucket: yoons-s3  # 실제 s3 버킷 이름
     region:
-      static: ${AWS_REGION}  # 실제 지역
+      static: ap-northeast-2 # 실제 지역
     stack:
       auto: false
     credentials:
-      accessKey: ${AWS_ACCESS_KEY} # 실제 엑세스 키
-      secretKey: ${AWS_SECRET_KEY}  # 실제 비밀 엑세스 키
+      accessKey: AKIAU6VTTQ4ELQ5SZGN7 # 실제 엑세스 키
+      secretKey: OMKKodLRRbtRydixVYioqswC/DMHE/NH+oEwyGFs  
