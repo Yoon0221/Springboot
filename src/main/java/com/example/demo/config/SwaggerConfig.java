@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public OpenAPI createOpenAPI() {
         // API 정보 설정
         Info apiInfo = new Info()
-                .title("내일은 드디어 너디너리 해커톤 ㄷㄷ") // API 제목
+                .title("제발 그냥 되라") // API 제목
                 .description("UMC Server WorkBook API 명세서") // API 설명
                 .version("1.0.0"); // API 버전
 
