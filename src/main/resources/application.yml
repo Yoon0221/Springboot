@@ -1,8 +1,8 @@
 server:
   ssl:
-    key-store: "classpath:keystore.p12"
+    key-store: "/path/to/keystore.p12"  # 경로를 GitHub Actions에서 복호화한 위치로 설정
     key-store-type: PKCS12
-    key-store-password: ${KEY_STORE_PASSWORD}
+    key-store-password: ${KEY_STORE_PASSWORD}  # 시크릿에서 가져오는 키스토어 비밀번호
   port: 443
 
 spring:
