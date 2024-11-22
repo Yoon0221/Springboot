@@ -25,8 +25,8 @@ jobs:
       - name: Grant execute permissions to gradlew
         run: chmod +x ./gradlew
 
-      # 4. Gradle 빌드 및 배포
-      - name: Run Gradle build and deploy
+      # 4. Gradle 빌드
+      - name: Run Gradle build
         env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
@@ -47,8 +47,7 @@ jobs:
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
         run: |
-          ./gradlew build  # 빌드 실행
-          ./gradlew bootRun  # 애플리케이션 실행
+          ./gradlew clean build  # 빌드 실행
 
       # 5. EC2에 배포 (443 포트 및 SSL 관련 설정 포함)
       - name: Deploy to EC2
@@ -59,16 +58,17 @@ jobs:
           chmod 600 private_key.pem
 
           # SSH를 통해 EC2 인스턴스에 연결
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            # 프로젝트 디렉토리로 이동
-            cd /home/ec2-user/my-app
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+            # 프로젝트 디렉토리로 이동 (Ubuntu 환경에서 올바른 경로로 변경)
+            cd /home/ubuntu
             
-            # 최신 코드 풀기
+            # 최신 코드 풀기 (필요시, git repository에서 코드 풀기)
             git pull origin main
             
-            # Gradle 빌드
-            sudo ./gradlew build
-            
+            # Gradle 빌드 (Gradle이 필요하면 빌드)
+            ./gradlew clean build
+
             # 443 포트에서 애플리케이션 실행 (SSL 포함)
-            sudo nohup java -Dserver.port=443 -Dserver.ssl.key-store=/path/to/keystore.jks -Dserver.ssl.key-store-password=${{ secrets.KEY_STORE_PASSWORD }} -jar demo-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
+            sudo java -Dserver.port=443 -Dserver.ssl.key-store=/path/to/keystore.jks -Dserver.ssl.key-store-password=${{ secrets.KEY_STORE_PASSWORD }} -jar /home/ubuntu/demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
+
           EOF
